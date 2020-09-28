@@ -1,4 +1,4 @@
-package com.example.catalog
+package com.example.catalog.ui.favorites
 
 import androidx.lifecycle.ViewModel
 
