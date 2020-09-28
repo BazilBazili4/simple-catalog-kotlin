@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_24px"
+        android:icon="@drawable/icon_home_selector"
         android:title="@string/title_home" />
 
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_favorite_border_24px"
+        android:icon="@drawable/icon_fav_selector"
         android:title="@string/title_favorite" />
 
     <item
         android:id="@+id/navigation_search"
-        android:icon="@drawable/ic_baseline_search_24"
+        android:icon="@drawable/ic_search_24px"
         android:title="@string/title_search" />
 
     <item
