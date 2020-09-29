@@ -1,12 +1,16 @@
 package com.example.catalog.ui.search
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnFocusChangeListener
+import android.view.View.OnTouchListener
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import com.example.catalog.R
+import com.google.android.material.textfield.TextInputEditText
+
 
 class SearchFragment : Fragment() {
 
