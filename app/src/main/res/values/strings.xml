@@ -7,4 +7,9 @@
     <string name="title_search">Поиск</string>
     <string name="title_settings">Настройки</string>
     <string name="title_list">Список</string>
+    <string name="button_search_title">Найти организацию</string>
+    <string name="button_list_title">Посмотреть каталог</string>
+    <string name="button_city_title">Выбрать муниципалитет</string>
+    <string name="greetings_message">С чего бы ты хотел начать работу?</string>
+
 </resources>

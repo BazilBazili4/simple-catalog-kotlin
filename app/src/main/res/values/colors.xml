@@ -7,6 +7,7 @@
     <color name="colorNavbarBackground">#FDFDFD</color>
     <color name="colorNavbarText">#0942ED</color>
     <color name="colorStatusBackground">#B2B7C8</color>
-
-
+    <color name="generalText">#000000</color>
+    <color name="buttonColor">#3B66E4</color>
+    <color name="buttonBorder">#D3D3D3</color>
 </resources>
