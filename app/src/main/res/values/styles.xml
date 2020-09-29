@@ -20,4 +20,20 @@
 
     </style>
 
+    <style name="buttonPrimary">
+        <item name="android:height">@dimen/big_button_height</item>
+        <item name="android:width">@dimen/big_button_width</item>
+        <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
+    <style name="buttonSecondary">
+        <item name="android:height">@dimen/big_button_height</item>
+        <item name="android:width">@dimen/big_button_width</item>
+        <item name="android:background">@drawable/rounded_button_white</item>
+        <item name="android:textColor">@color/generalText</item>
+        <item name="android:padding">10dp</item>
+    </style>
+
 </resources>
