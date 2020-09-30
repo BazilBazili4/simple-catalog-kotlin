@@ -32,6 +32,17 @@
         <item name="android:gravity">left|center_vertical</item>
     </style>
 
+    <style name="buttonPrimarySmall">
+        <item name="android:height">@dimen/small_button_height</item>
+        <item name="android:width">@dimen/small_button_width</item>
+        <item name="android:background">@drawable/rounded_button</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:paddingStart">@dimen/button_padding_start</item>
+        <item name="android:paddingEnd">@dimen/button_padding_end</item>
+        <item name="android:gravity">center|center_vertical</item>
+    </style>
+
     <style name="buttonSecondary">
         <item name="android:height">@dimen/big_button_height</item>
         <item name="android:width">@dimen/big_button_width</item>
@@ -42,6 +53,13 @@
         <item name="android:paddingEnd">@dimen/button_padding_end</item>
         <item name="android:drawableEnd">@drawable/ic_arrow</item>
         <item name="android:gravity">left|center_vertical</item>
+    </style>
+
+    <style name="searchInput">
+        <item name="android:textColor">@color/secondaryText</item>
+        <item name="android:textSize">@dimen/input_text_size</item>
+        <item name="android:textColorHint">@color/secondaryText</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>

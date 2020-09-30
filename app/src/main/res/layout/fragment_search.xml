@@ -16,6 +16,7 @@
             android:background="@drawable/rounded_border"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
+            android:layout_marginBottom="5dp"
             app:startIconDrawable="@drawable/ic_search"
             android:paddingTop="3dp"
             android:paddingBottom="3dp"
@@ -31,13 +32,76 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:gravity="center_vertical"
-                android:hint="Введите название"
+                android:hint="@string/search_input_hint"
                 android:textColor="@color/secondaryText"
                 android:textSize="24sp"
                 android:textColorHint="@color/secondaryText"
                 android:textCursorDrawable="@null"
                 />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <Spinner
+            android:id="@+id/spinner_city"
+            android:spinnerMode="dropdown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="20dp" />
+
+        <Spinner
+            android:id="@+id/spinner_direct"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:entries="@array/brew_array2"
+            android:layout_marginTop="20dp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_phone_input"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:hintTextColor="@color/secondaryText"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/searchInput"
+                android:hint="@string/phone_input_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/search_address_input"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            app:hintTextColor="@color/secondaryText"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/searchInput"
+                android:hint="@string/address_input_hint" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_button"
+            style="@style/buttonPrimarySmall"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Найти" />
     </LinearLayout>
 
 </FrameLayout>

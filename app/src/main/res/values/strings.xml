@@ -11,5 +11,20 @@
     <string name="button_list_title">Посмотреть каталог</string>
     <string name="button_city_title">Выбрать муниципалитет</string>
     <string name="greetings_message">С чего бы ты хотел начать работу?</string>
+    <string name="phone_input_hint">Номер телефона</string>
+    <string name="address_input_hint">Адрес</string>
+    <string name="city_input_hint">Муниципалитет</string>
+    <string name="direction_input_hint">Направленность ДО</string>
+    <string name="search_input_hint">Введите название</string>
+
+    <string-array name="brew_array">
+        <item>Муниципалитет</item>
+        <item>Белгород</item>
+    </string-array>
+
+    <string-array name="brew_array2">
+        <item>Направленность ДО</item>
+        <item>Литература</item>
+    </string-array>
 
 </resources>
