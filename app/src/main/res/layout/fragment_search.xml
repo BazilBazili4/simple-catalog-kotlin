@@ -63,7 +63,7 @@
             android:layout_marginTop="20dp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_phone_input"
+            android:id="@+id/search_phone_input_layout"
             android:layout_width="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -71,6 +71,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_phone_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/searchInput"
@@ -78,7 +79,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/search_address_input"
+            android:id="@+id/search_address_input_layout"
             android:layout_width="match_parent"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -86,6 +87,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/search_address_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 style="@style/searchInput"
@@ -102,6 +104,30 @@
             android:layout_marginEnd="8dp"
             android:layout_gravity="center_horizontal"
             android:text="Найти" />
+
+        <TextView
+            android:id="@+id/search_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/search_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/search_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/search_direct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
     </LinearLayout>
 
 </FrameLayout>

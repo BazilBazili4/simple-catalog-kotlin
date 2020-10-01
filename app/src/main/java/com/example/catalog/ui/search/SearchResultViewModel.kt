@@ -1,8 +1,7 @@
 package com.example.catalog.ui.search
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SearchFragmentViewModel : ViewModel() {
+class SearchResultViewModel : ViewModel() {
     // TODO: Implement the ViewModel
 }

@@ -6,7 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 import com.example.catalog.R
+import com.example.catalog.ui.home.HomeViewModel
 
 class CatalogFragment : Fragment() {
 
@@ -20,7 +23,24 @@ class CatalogFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_catalog, container, false)
+        val root = inflater.inflate(R.layout.fragment_catalog, container, false)
+        viewModel =
+            ViewModelProviders.of(this).get(CatalogViewModel::class.java)
+
+        val textView: TextView = root.findViewById(R.id.greeting_text)
+        viewModel.text.observe(viewLifecycleOwner, Observer {
+            textView.text = it
+        })
+
+        val secondTextView: TextView = root.findViewById(R.id.second_text)
+        viewModel.secondField.observe(viewLifecycleOwner, Observer {
+            secondTextView.text = it
+        })
+
+        val button: TextView = root.findViewById(R.id.button)
+        button.setOnClickListener { viewModel.updateGreet(true, "fuck") }
+
+        return root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -4,13 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
+import android.widget.*
 import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
-import android.widget.Spinner
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.catalog.R
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 class SearchFragment : Fragment() {
@@ -51,6 +54,29 @@ class SearchFragment : Fragment() {
             // Apply the adapter to the spinner
             spinnerDirect.adapter = adapter
         }
+
+        val button: Button = root.findViewById(R.id.search_button)
+        val inputPhone: TextInputEditText = root.findViewById(R.id.search_phone_input)
+        val inputAddress: TextInputEditText = root.findViewById(R.id.search_address_input)
+        val inputName: TextInputEditText = root.findViewById(R.id.search_name_input)
+
+
+
+        button.setOnClickListener {
+            val bundle = createSearchParams(
+                inputName.text.toString(),
+                inputPhone.text.toString(),
+                spinnerDirect.selectedItem.toString(),
+                spinnerCity.selectedItem.toString(),
+                inputAddress.text.toString()
+            )
+            it.findNavController().navigate(R.id.search_result, bundle)
+        }
+
+//        button.setOnClickListener(
+//            Navigation.createNavigateOnClickListener(R.id.search_result, bundle)
+//        )
+
         return root
     }
 
@@ -58,6 +84,16 @@ class SearchFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(SearchFragmentViewModel::class.java)
         // TODO: Use the ViewModel
+    }
+
+    fun createSearchParams(name: String, phone: String, direction: String, city: String, address: String): Bundle {
+        return bundleOf(
+            "name" to name,
+            "phone" to phone,
+            "direction" to direction,
+            "city" to city,
+            "address" to address
+        )
     }
 
 }
