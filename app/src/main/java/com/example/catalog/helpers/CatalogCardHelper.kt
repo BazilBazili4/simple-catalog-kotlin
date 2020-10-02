@@ -66,6 +66,7 @@ class CatalogCardHelper {
             convertDpToPixels(10, context),
             convertDpToPixels(0, context)
         )
+        checkBox.isChecked = isChecked
         val checkboxDrawable: Drawable = context.resources.getDrawable(R.drawable.favorites_checkbox_selector)
         checkboxDrawable.mutate()
         checkBox.buttonDrawable = null
