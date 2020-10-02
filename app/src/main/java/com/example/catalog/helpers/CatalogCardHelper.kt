@@ -110,6 +110,100 @@ class CatalogCardHelper {
         return  textView
     }
 
+    fun createContactsLayout(context: Context): TableLayout {
+        val tableLayout = TableLayout(context)
+        val params = TableLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.MATCH_PARENT
+        )
+        params.setMargins(
+            convertDpToPixels(0, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(0, context),
+            convertDpToPixels(0, context)
+        )
+        tableLayout.layoutParams = params
+        return  tableLayout
+    }
+
+    fun createContactsRow(context: Context): TableRow {
+        val  tableRow = TableRow(context)
+        val params = TableRow.LayoutParams(
+            TableRow.LayoutParams.MATCH_PARENT,
+            TableRow.LayoutParams.MATCH_PARENT
+        )
+        params.setMargins(
+            convertDpToPixels(10, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(10, context),
+            convertDpToPixels(0, context)
+        )
+        tableRow.layoutParams = params
+        return tableRow
+    }
+
+    fun createPhoneView(context: Context, phone: String): TextView {
+        val textView = TextView(context)
+        val params = TableRow.LayoutParams(
+            TableRow.LayoutParams.MATCH_PARENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(
+            convertDpToPixels(10, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(10, context),
+            convertDpToPixels(0, context)
+        )
+        textView.layoutParams = params
+        textView.setTextColor(context.resources.getColor(R.color.generalText))
+        textView.textSize = 16F
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            context.resources.getDrawable(R.drawable.ic_phone),
+            null,
+            null,
+            null
+        )
+        textView.text = phone
+        return  textView
+    }
+
+    fun createAddressView(context: Context, address: String): TextView {
+        val textView = TextView(context)
+        val params = TableRow.LayoutParams(
+            TableRow.LayoutParams.MATCH_PARENT,
+            TableRow.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(
+            convertDpToPixels(10, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(10, context),
+            convertDpToPixels(0, context)
+        )
+        textView.layoutParams = params
+        textView.setTextColor(context.resources.getColor(R.color.generalText))
+        textView.textSize = 16F
+        textView.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            context.resources.getDrawable(R.drawable.ic_location),
+            null,
+            null,
+            null
+        )
+        textView.text = address
+        return  textView
+    }
+
+    fun createContactsBlock(context: Context, phone: String, address: String): TableLayout {
+        val contactsLayout = createContactsLayout(context)
+        val contactsRaw = createContactsRow(context)
+        val phoneView = createPhoneView(context, phone)
+        val addressView = createAddressView(context, address)
+        contactsRaw.addView(phoneView)
+        contactsRaw.addView(addressView)
+        contactsLayout.addView(contactsRaw)
+        contactsLayout.setStretchAllColumns(true)
+        return contactsLayout
+    }
+
     fun createCatalogCard(context: Context): LinearLayout {
         val imageLayout = createRelativeLayout(context)
         val imageView = createImageView(context)
@@ -122,6 +216,9 @@ class CatalogCardHelper {
         cardLayout.addView(imageLayout)
         cardLayout.addView(title)
         cardLayout.addView(description)
+        cardLayout.addView(
+            createContactsBlock(context, "+79209999999", "ул. Ленина 26")
+        )
 
         return cardLayout
     }
