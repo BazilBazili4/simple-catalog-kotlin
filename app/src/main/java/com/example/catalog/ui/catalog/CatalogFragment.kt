@@ -55,13 +55,6 @@ class CatalogFragment : Fragment() {
         return root
     }
 
-    fun createButton(text: String): Button {
-        val buttonExample: Button = Button(requireContext())
-        buttonExample.setBackgroundColor(Color.GREEN)
-        buttonExample.layoutParams = 
-        return buttonExample
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(CatalogViewModel::class.java)

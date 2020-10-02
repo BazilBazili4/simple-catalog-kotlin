@@ -2,6 +2,7 @@ package com.example.catalog.helpers
 
 import android.content.Context
 import android.content.res.Resources
+import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.widget.*
 import com.example.catalog.R
@@ -57,17 +58,19 @@ class CatalogCardHelper {
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         params.addRule(RelativeLayout.ALIGN_PARENT_RIGHT)
+        params.width = convertDpToPixels(40, context)
+        params.height = convertDpToPixels(40, context)
         params.setMargins(
+            convertDpToPixels(0, context),
             convertDpToPixels(10, context),
             convertDpToPixels(10, context),
-            convertDpToPixels(10, context),
-            convertDpToPixels(10, context)
+            convertDpToPixels(0, context)
         )
-        if (isChecked) {
-            checkBox.setBackgroundResource(R.drawable.ic_heart_filled)
-        } else {
-            checkBox.setBackgroundResource(R.drawable.ic_heart_empty)
-        }
+        val checkboxDrawable: Drawable = context.resources.getDrawable(R.drawable.favorites_checkbox_selector)
+        checkboxDrawable.mutate()
+        checkBox.buttonDrawable = null
+        checkBox.setBackgroundDrawable(checkboxDrawable)
+
         checkBox.layoutParams = params
         return checkBox
     }
