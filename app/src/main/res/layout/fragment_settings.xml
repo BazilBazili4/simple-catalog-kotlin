@@ -5,9 +5,55 @@
     android:layout_height="match_parent"
     tools:context=".ui.settings.SettingsFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/title_settings" />
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/cache_button"
+            style="@style/buttonPrimarySmall"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Очистить кэш" />
+
+        <Button
+            android:id="@+id/refresh_button"
+            style="@style/buttonPrimarySmall"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="10dp"
+            android:layout_gravity="center_horizontal"
+            android:text="Обновить данные" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="10dp"
+            android:textSize="24sp"
+            android:textColor="@color/generalText"
+            android:text="Муниципалитет по умолчанию" />
+
+        <Spinner
+            android:id="@+id/spinner_city"
+            android:spinnerMode="dropdown"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/Base.Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="2dp" />
+
+    </LinearLayout>
 
 </FrameLayout>
