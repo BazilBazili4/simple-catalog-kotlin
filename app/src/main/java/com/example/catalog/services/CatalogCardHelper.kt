@@ -227,6 +227,25 @@ class CatalogCardHelper {
         return cardLayout
     }
 
+    fun createIconLayout(context: Context): LinearLayout {
+        val r: Resources = context.resources
+        val layout = LinearLayout(context)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(
+            convertDpToPixels(8, context),
+            convertDpToPixels(30, context),
+            convertDpToPixels(8, context),
+            convertDpToPixels(8, context)
+        )
+        layout.layoutParams = params
+        layout.setBackgroundResource(R.drawable.ic_heart_filled)
+
+        return layout
+    }
+
     private fun convertDpToPixels(dpValue: Int, context: Context): Int {
         val r: Resources = context.resources
         val px = TypedValue.applyDimension(

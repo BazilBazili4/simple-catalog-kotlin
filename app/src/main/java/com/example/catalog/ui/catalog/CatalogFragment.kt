@@ -31,6 +31,8 @@ class CatalogFragment : Fragment() {
         for(i in 1..5){
             baseLayout.addView(cardHelper.createCatalogCard(requireContext()))
         }
+        baseLayout.addView(cardHelper.createIconLayout(requireContext()))
+
 
         return root
     }
