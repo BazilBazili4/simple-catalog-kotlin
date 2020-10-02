@@ -24,7 +24,7 @@ class CatalogCardHelper {
             convertDpToPixels(8, context)
         )
         layout.layoutParams = params
-        layout.setBackgroundResource(R.drawable.rounded_button_white)
+        layout.setBackgroundResource(R.drawable.catalog_card)
         layout.orientation = LinearLayout.VERTICAL
 
         return layout

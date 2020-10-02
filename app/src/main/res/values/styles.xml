@@ -11,6 +11,10 @@
 
     </style>
 
+    <style name="MyDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:background">@drawable/catalog_card</item>
+    </style>
+
     <style name="BottomNavigation">
         <item name="android:background">@color/colorNavbarBackground</item>
         <item name="itemBackground">@color/colorNavbarBackground</item>

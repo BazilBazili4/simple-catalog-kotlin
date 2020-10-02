@@ -28,7 +28,9 @@ class CatalogFragment : Fragment() {
 
         val cardHelper = CatalogCardHelper()
         val baseLayout: LinearLayout = root.findViewById(R.id.base_layout)
-        baseLayout.addView(cardHelper.createCatalogCard(requireContext()))
+        for(i in 1..5){
+            baseLayout.addView(cardHelper.createCatalogCard(requireContext()))
+        }
 
         return root
     }

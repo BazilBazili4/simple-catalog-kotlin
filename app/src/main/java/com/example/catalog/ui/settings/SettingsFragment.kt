@@ -42,10 +42,14 @@ class SettingsFragment : Fragment() {
 
         spinnerCity?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val ad = AlertDialog.Builder(requireContext()).create()
-                ad.setMessage("Муниципалитет изменен")
-                ad.setCancelable(true)
-                ad.show()
+                val defaulValue = "Муниципалитет"
+                val selectedValue = spinnerCity.selectedItem.toString()
+                if (!defaulValue.equals(selectedValue)) {
+                    val ad = AlertDialog.Builder(requireContext()).create()
+                    ad.setMessage("Муниципалитет по умолчанию: $selectedValue")
+                    ad.setCancelable(true)
+                    ad.show()
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
