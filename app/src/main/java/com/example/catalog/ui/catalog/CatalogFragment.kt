@@ -1,23 +1,14 @@
 package com.example.catalog.ui.catalog
 
-import android.graphics.Color
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.LinearLayout
-import android.widget.RelativeLayout
-import android.widget.TextView
-import androidx.core.view.marginBottom
-import androidx.core.view.marginLeft
-import androidx.core.view.marginStart
-import androidx.lifecycle.Observer
 import com.example.catalog.R
-import com.example.catalog.helpers.CatalogCardHelper
-import com.example.catalog.ui.home.HomeViewModel
+import com.example.catalog.services.CatalogCardHelper
 
 class CatalogFragment : Fragment() {
 

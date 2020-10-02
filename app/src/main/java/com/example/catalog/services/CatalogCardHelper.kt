@@ -1,4 +1,4 @@
-package com.example.catalog.helpers
+package com.example.catalog.services
 
 import android.content.Context
 import android.content.res.Resources
