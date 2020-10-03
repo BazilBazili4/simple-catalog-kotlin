@@ -7,6 +7,7 @@
     <string name="title_search">Поиск оганизации</string>
     <string name="title_settings">Настройки</string>
     <string name="title_list">Список</string>
+    <string name="cities_title">Муниципалитеты</string>
     <string name="title_search_result">Результат поиска</string>
     <string name="button_search_title">Найти организацию</string>
     <string name="button_list_title">Посмотреть каталог</string>

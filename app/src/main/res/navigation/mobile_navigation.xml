@@ -45,4 +45,10 @@
         android:label="@string/title_search_result"
         tools:layout="@layout/fragment_search_result" />
 
+    <fragment
+        android:id="@+id/navigation_city"
+        android:name="com.example.catalog.ui.city.CityFragment"
+        android:label="@string/cities_title"
+        tools:layout="@layout/fragment_city" />
+
 </navigation>

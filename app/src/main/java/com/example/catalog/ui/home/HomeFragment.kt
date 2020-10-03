@@ -34,6 +34,9 @@ class HomeFragment : Fragment() {
         val buttonToList: Button = root.findViewById(R.id.to_list_button)
         buttonToList.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_list, null))
 
+        val buttonToCity: Button = root.findViewById(R.id.to_city_button)
+        buttonToCity.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_city, null))
+
         return root
     }
 }
