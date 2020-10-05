@@ -31,7 +31,7 @@ class SearchFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_search, container, false)
         val dbService: DatabaseService = DatabaseService()
         val spinnerCity: Spinner = root.findViewById(R.id.spinner_city)
-        val cities: ArrayList<String> = dbService.getAllCitiesAsArray()
+        val cities: ArrayList<String> = dbService.getAllCitiesTitlesAsArray()
         // Create an ArrayAdapter using the string array and a default spinner layout
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
@@ -45,17 +45,16 @@ class SearchFragment : Fragment() {
 
 
         val spinnerDirect: Spinner = root.findViewById(R.id.spinner_direct)
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
+        val directions: ArrayList<String> = dbService.getAllDirectionsTitlesAsArray()
+
+        val adapterDirections: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
-            R.array.brew_array2,
-            R.layout.spinner
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinnerDirect.adapter = adapter
-        }
+            android.R.layout.simple_spinner_dropdown_item,
+            directions
+        )
+        adapterDirections.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        spinnerDirect.adapter = adapterDirections
 
         val button: Button = root.findViewById(R.id.search_button)
         val inputPhone: TextInputEditText = root.findViewById(R.id.search_phone_input)
