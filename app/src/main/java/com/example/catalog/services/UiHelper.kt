@@ -11,6 +11,7 @@ import android.view.Gravity
 import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import com.example.catalog.R
 import com.example.catalog.models.Organization
 import com.squareup.picasso.Picasso
@@ -34,7 +35,13 @@ class UiHelper {
         layout.layoutParams = params
         layout.setBackgroundResource(R.drawable.catalog_card)
         layout.orientation = LinearLayout.VERTICAL
-
+        layout.isClickable = true
+        layout.setOnClickListener {
+            val bundle = bundleOf(
+                "organizationId" to cardId
+            )
+            it.findNavController().navigate(R.id.navigation_organization, bundle)
+        }
         return layout
     }
 

@@ -18,6 +18,7 @@
     <string name="city_input_hint">Муниципалитет</string>
     <string name="direction_input_hint">Направленность ДО</string>
     <string name="search_input_hint">Введите название</string>
+    <string name="return_title">Назад</string>
 
     <string-array name="brew_array">
         <item>Муниципалитет</item>

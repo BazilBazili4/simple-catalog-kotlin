@@ -51,4 +51,11 @@
         android:label="@string/cities_title"
         tools:layout="@layout/fragment_city" />
 
+    <fragment
+        android:id="@+id/navigation_organization"
+        android:name="com.example.catalog.ui.organization.OrganizationFragment"
+        android:label="@string/return_title"
+        tools:layout="@layout/fragment_organization" />
+
+
 </navigation>
