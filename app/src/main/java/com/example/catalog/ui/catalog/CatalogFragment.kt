@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import com.example.catalog.R
-import com.example.catalog.services.CatalogCardHelper
+import com.example.catalog.services.UiHelper
 
 class CatalogFragment : Fragment() {
 
@@ -26,7 +26,7 @@ class CatalogFragment : Fragment() {
         viewModel =
             ViewModelProviders.of(this).get(CatalogViewModel::class.java)
 
-        val cardHelper = CatalogCardHelper()
+        val cardHelper = UiHelper()
         val baseLayout: LinearLayout = root.findViewById(R.id.base_layout)
         for(i in 1..5){
             baseLayout.addView(cardHelper.createCatalogCard(requireContext()))

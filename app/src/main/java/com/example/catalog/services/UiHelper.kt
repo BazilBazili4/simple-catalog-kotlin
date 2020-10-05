@@ -1,14 +1,18 @@
 package com.example.catalog.services
 
+import android.app.ActionBar
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
+import android.view.Gravity
 import android.widget.*
+import androidx.core.os.bundleOf
+import androidx.navigation.Navigation
 import com.example.catalog.R
 
 
-class CatalogCardHelper {
+class UiHelper {
 
     fun createCardLayout(cardId: Int, context: Context): LinearLayout {
         val r: Resources = context.resources
@@ -244,6 +248,49 @@ class CatalogCardHelper {
         layout.setBackgroundResource(R.drawable.ic_heart_filled)
 
         return layout
+    }
+
+    fun createSecondaryButton(context: Context, title: String): Button {
+        val button: Button = Button(context)
+        val params = LinearLayout.LayoutParams(
+            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT
+        )
+        params.setMargins(
+            convertDpToPixels(8, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(8, context),
+            convertDpToPixels(0, context)
+        )
+        button.setPadding(
+            convertDpToPixels(10, context),
+            convertDpToPixels(5, context),
+            convertDpToPixels(10, context),
+            convertDpToPixels(5, context)
+        )
+        button.layoutParams = params
+        button.gravity = Gravity.LEFT or Gravity.CENTER_VERTICAL
+        button.setBackgroundResource(R.drawable.rounded_button_white)
+        button.setTextColor(context.resources.getColor(R.color.generalText))
+        button.setCompoundDrawablesRelativeWithIntrinsicBounds(
+            context.resources.getDrawable(R.drawable.ic_location),
+            null,
+            context.resources.getDrawable(R.drawable.ic_arrow),
+            null
+        )
+        val bundle = bundleOf(
+            "name" to "",
+            "phone" to "",
+            "direction" to "",
+            "city" to title,
+            "address" to ""
+        )
+        button.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.search_result, bundle)
+        )
+        button.text = title
+        return  button
+
     }
 
     private fun convertDpToPixels(dpValue: Int, context: Context): Int {
