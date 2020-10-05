@@ -1,5 +1,7 @@
 package com.example.catalog.services
 
+import RoundedTransformation
+import android.accounts.AccountManager.get
 import android.app.ActionBar
 import android.content.Context
 import android.content.res.Resources
@@ -10,11 +12,13 @@ import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.navigation.Navigation
 import com.example.catalog.R
+import com.example.catalog.models.Organization
+import com.squareup.picasso.Picasso
 
 
 class UiHelper {
 
-    fun createCardLayout(cardId: Int, context: Context): LinearLayout {
+    fun createCardLayout(cardId: Long, context: Context): LinearLayout {
         val r: Resources = context.resources
         val layout = LinearLayout(context)
         val params = LinearLayout.LayoutParams(
@@ -38,9 +42,10 @@ class UiHelper {
         val layout = RelativeLayout(context)
         val params = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
+            RelativeLayout.LayoutParams.MATCH_PARENT
         )
         layout.layoutParams = params
+
         return layout
     }
 
@@ -48,10 +53,10 @@ class UiHelper {
         val imageView = ImageView(context)
         val params = RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
-            RelativeLayout.LayoutParams.WRAP_CONTENT
+            RelativeLayout.LayoutParams.MATCH_PARENT
         )
         imageView.layoutParams = params
-        imageView.setBackgroundResource(R.drawable.ic_baseline_photo_camera_24)
+        imageView.clipToOutline = true
         return  imageView
     }
 
@@ -128,7 +133,7 @@ class UiHelper {
             convertDpToPixels(0, context),
             convertDpToPixels(5, context),
             convertDpToPixels(0, context),
-            convertDpToPixels(0, context)
+            convertDpToPixels(8, context)
         )
         tableLayout.layoutParams = params
         return  tableLayout
@@ -212,20 +217,29 @@ class UiHelper {
         return contactsLayout
     }
 
-    fun createCatalogCard(context: Context): LinearLayout {
+    fun createCatalogCard(context: Context, organization: Organization): LinearLayout {
         val imageLayout = createRelativeLayout(context)
         val imageView = createImageView(context)
-        val favoritesCheckbox = createFavoritesCheckbox(context, true)
+        val transformation: RoundedTransformation = RoundedTransformation(50, 0)
+        Picasso.with(context)
+            .load(organization.logoImg)
+            .transform(transformation)
+            .fit()
+            .placeholder(R.drawable.ic_baseline_photo_camera_24) //optional
+            .error(R.drawable.ic_setting_empty)
+            .into(imageView)
+
+        val favoritesCheckbox = createFavoritesCheckbox(context, organization.isFavorite)
         imageLayout.addView(imageView)
         imageLayout.addView(favoritesCheckbox)
-        val title = createTitle(context, "СОШ №27 Школа")
-        val description = createDescription(context, "Мини описание, возможно, даже в две строки")
-        val cardLayout = createCardLayout(1, context)
+        val title = createTitle(context, organization.shortTitle)
+        val description = createDescription(context, organization.shortDescription)
+        val cardLayout = createCardLayout(organization.id, context)
         cardLayout.addView(imageLayout)
         cardLayout.addView(title)
         cardLayout.addView(description)
         cardLayout.addView(
-            createContactsBlock(context, "+79209999999", "ул. Ленина 26")
+            createContactsBlock(context, organization.phone, organization.address)
         )
 
         return cardLayout

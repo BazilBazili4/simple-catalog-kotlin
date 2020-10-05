@@ -2,6 +2,7 @@ package com.example.catalog.services
 
 import com.example.catalog.models.City
 import com.example.catalog.models.Direction
+import com.example.catalog.models.Organization
 import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.createObject
@@ -44,6 +45,35 @@ class DatabaseService {
 
     }
 
+    fun createDummyOrganization() {
+
+        //The writing to our database always must be in a transaction
+        realm.executeTransaction {
+
+            for(cityCount in 0 until 10){
+                //The value we send as parameter is the primary key
+                val organization = it.createObject<Organization>(cityCount)
+                organization.title = "testName{$cityCount}"
+                organization.description = "testDescription{$cityCount}"
+                organization.shortTitle = "testShortTitle{$cityCount}"
+                organization.shortDescription = "testShortDescription{$cityCount}"
+                organization.address = "testAddress{$cityCount}"
+                organization.phone = "testPhone{$cityCount}"
+                organization.city = "testName{$cityCount}"
+                organization.direction = "testName{$cityCount}"
+                organization.factsDescription =  "testFactsDescription{$cityCount}"
+                organization.siteUrl = "https://github.com"
+                organization.programmUrl = "https://www.google.com"
+                organization.vkLink = "https://www.vk.com"
+                organization.instagramLink = "https://www.instagram.com"
+                organization.classmatesLink = "https://ok.ru"
+                organization.youtubeLink = "https://www.youtube.com"
+            }
+
+        }
+
+    }
+
     fun getAllCities(): RealmResults<City> {
         val cities = realm.where<City>().findAll()
         return  cities
@@ -70,5 +100,10 @@ class DatabaseService {
             directionsArray.add(it.title)
         }
         return directionsArray
+    }
+
+    fun getAllOrganizations(): RealmResults<Organization> {
+        val organization = realm.where<Organization>().findAll()
+        return  organization
     }
 }

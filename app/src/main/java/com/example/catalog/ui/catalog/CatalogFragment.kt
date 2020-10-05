@@ -7,8 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.TextView
 import com.example.catalog.R
+import com.example.catalog.models.City
+import com.example.catalog.models.Organization
+import com.example.catalog.services.DatabaseService
 import com.example.catalog.services.UiHelper
+import io.realm.RealmResults
 
 class CatalogFragment : Fragment() {
 
@@ -27,9 +32,14 @@ class CatalogFragment : Fragment() {
             ViewModelProviders.of(this).get(CatalogViewModel::class.java)
 
         val cardHelper = UiHelper()
+        val dbService: DatabaseService = DatabaseService()
+
         val baseLayout: LinearLayout = root.findViewById(R.id.base_layout)
-        for(i in 1..5){
-            baseLayout.addView(cardHelper.createCatalogCard(requireContext()))
+        val organizations: RealmResults<Organization> = dbService.getAllOrganizations()
+        for (organization in organizations) {
+            baseLayout.addView(
+                cardHelper.createCatalogCard(requireContext(), organization)
+            )
         }
         baseLayout.addView(cardHelper.createIconLayout(requireContext()))
 
