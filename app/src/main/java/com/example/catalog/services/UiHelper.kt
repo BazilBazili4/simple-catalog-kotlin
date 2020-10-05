@@ -258,7 +258,7 @@ class UiHelper {
         val r: Resources = context.resources
         val layout = LinearLayout(context)
         val params = LinearLayout.LayoutParams(
-            LinearLayout.LayoutParams.MATCH_PARENT,
+            LinearLayout.LayoutParams.WRAP_CONTENT,
             LinearLayout.LayoutParams.WRAP_CONTENT
         )
         params.setMargins(
@@ -267,9 +267,21 @@ class UiHelper {
             convertDpToPixels(8, context),
             convertDpToPixels(8, context)
         )
-        layout.layoutParams = params
-        layout.setBackgroundResource(R.drawable.ic_heart_filled)
 
+        params.gravity = Gravity.CENTER or Gravity.CENTER_VERTICAL
+
+        layout.layoutParams = params
+//        layout.setBackgroundResource(R.drawable.ic_outline_sentiment_satisfied_24)
+        val imageView = ImageView(context)
+        val imageParams = RelativeLayout.LayoutParams(
+            RelativeLayout.LayoutParams.WRAP_CONTENT,
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        )
+        imageView.setImageDrawable(
+            context.resources.getDrawable(R.drawable.ic_outline_sentiment_satisfied_24),
+        )
+        imageView.layoutParams = imageParams
+        layout.addView(imageView)
         return layout
     }
 
