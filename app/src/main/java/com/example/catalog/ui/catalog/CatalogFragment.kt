@@ -38,7 +38,7 @@ class CatalogFragment : Fragment() {
         val organizations: RealmResults<Organization> = dbService.getAllOrganizations()
         for (organization in organizations) {
             baseLayout.addView(
-                cardHelper.createCatalogCard(requireContext(), organization)
+                cardHelper.createCatalogCard(requireContext(), organization, dbService)
             )
         }
         baseLayout.addView(cardHelper.createIconLayout(requireContext()))

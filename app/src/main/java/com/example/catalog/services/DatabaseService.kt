@@ -7,6 +7,7 @@ import io.realm.Realm
 import io.realm.RealmResults
 import io.realm.kotlin.createObject
 import io.realm.kotlin.where
+import java.net.Inet4Address
 
 
 class DatabaseService {
@@ -75,7 +76,7 @@ class DatabaseService {
     }
 
     fun getAllCities(): RealmResults<City> {
-        val cities = realm.where<City>().findAll()
+        val cities = realm.where<City>().findAllAsync()
         return  cities
     }
 
@@ -89,7 +90,7 @@ class DatabaseService {
     }
 
     fun getAllDirections(): RealmResults<Direction> {
-        val direction = realm.where<Direction>().findAll()
+        val direction = realm.where<Direction>().findAllAsync()
         return  direction
     }
 
@@ -103,7 +104,42 @@ class DatabaseService {
     }
 
     fun getAllOrganizations(): RealmResults<Organization> {
-        val organization = realm.where<Organization>().findAll()
+        val organization = realm.where<Organization>().findAllAsync()
         return  organization
+    }
+
+    fun getOrganizationById(id: Long): Organization? {
+        return realm.where<Organization>()
+            .equalTo("id", id)
+            .findFirst()
+    }
+
+    fun getOrganizationsByParams(city: String?, direction: String?, phone: String?, address: String?): RealmResults<Organization> {
+        return realm.where<Organization>()
+            .equalTo("cty", city)
+            .equalTo("direction", direction)
+            .equalTo("phone", phone)
+            .equalTo("address", address)
+            .findAllAsync()
+    }
+
+    fun getFavoritesOrganizations(): RealmResults<Organization> {
+        return realm.where<Organization>()
+            .equalTo("isFavorite", true)
+            .findAll()
+    }
+
+    fun setOrganizationFavorite(id: Long) {
+        val organization = getOrganizationById(id)
+        realm.executeTransaction{
+            organization?.isFavorite = true
+        }
+    }
+
+    fun removeOrganizationFavorite(id: Long) {
+        val organization = getOrganizationById(id)
+        realm.executeTransaction{
+            organization?.isFavorite = false
+        }
     }
 }

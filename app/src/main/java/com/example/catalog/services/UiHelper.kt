@@ -60,7 +60,7 @@ class UiHelper {
         return  imageView
     }
 
-    fun createFavoritesCheckbox(context: Context, isChecked: Boolean): CheckBox {
+    fun createFavoritesCheckbox(context: Context, isChecked: Boolean, databaseService: DatabaseService, organizationId: Long): CheckBox {
         val checkBox = CheckBox(context)
         val params = RelativeLayout.LayoutParams(
             LinearLayout.LayoutParams.WRAP_CONTENT,
@@ -80,6 +80,15 @@ class UiHelper {
         checkboxDrawable.mutate()
         checkBox.buttonDrawable = null
         checkBox.setBackgroundDrawable(checkboxDrawable)
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                databaseService.setOrganizationFavorite(organizationId)
+                Toast.makeText(context, "Организация добавлена в избранное",Toast.LENGTH_LONG).show()
+            } else {
+                databaseService.removeOrganizationFavorite(organizationId)
+                Toast.makeText(context, "Организация удалена из избранного",Toast.LENGTH_LONG).show()
+            }
+        }
 
         checkBox.layoutParams = params
         return checkBox
@@ -217,7 +226,7 @@ class UiHelper {
         return contactsLayout
     }
 
-    fun createCatalogCard(context: Context, organization: Organization): LinearLayout {
+    fun createCatalogCard(context: Context, organization: Organization, databaseService: DatabaseService): LinearLayout {
         val imageLayout = createRelativeLayout(context)
         val imageView = createImageView(context)
         val transformation: RoundedTransformation = RoundedTransformation(50, 0)
@@ -229,7 +238,7 @@ class UiHelper {
             .error(R.drawable.ic_setting_empty)
             .into(imageView)
 
-        val favoritesCheckbox = createFavoritesCheckbox(context, organization.isFavorite)
+        val favoritesCheckbox = createFavoritesCheckbox(context, organization.isFavorite, databaseService, organization.id)
         imageLayout.addView(imageView)
         imageLayout.addView(favoritesCheckbox)
         val title = createTitle(context, organization.shortTitle)
