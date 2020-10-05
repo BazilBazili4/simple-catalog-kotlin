@@ -114,13 +114,20 @@ class DatabaseService {
             .findFirst()
     }
 
-    fun getOrganizationsByParams(city: String?, direction: String?, phone: String?, address: String?): RealmResults<Organization> {
-        return realm.where<Organization>()
-            .equalTo("cty", city)
-            .equalTo("direction", direction)
-            .equalTo("phone", phone)
-            .equalTo("address", address)
-            .findAllAsync()
+    fun getOrganizationsByParams(city: String?, direction: String?, phone: String?, address: String?, title: String?): RealmResults<Organization> {
+        var query = realm.where<Organization>()
+        if (!isNullOrEmpty(city)) query.equalTo("city", city).and()
+        if (!isNullOrEmpty(direction)) query.equalTo("direction", direction).and()
+        if (!isNullOrEmpty(phone)) query.equalTo("phone", phone).and()
+        if (!isNullOrEmpty(address)) query.like("address", address).and()
+        if (!isNullOrEmpty(title)) query.like("title", title)
+        return query.findAllAsync()
+    }
+
+    fun isNullOrEmpty(str: String?): Boolean {
+        if (str != null && !str.isEmpty())
+            return false
+        return true
     }
 
     fun getFavoritesOrganizations(): RealmResults<Organization> {
