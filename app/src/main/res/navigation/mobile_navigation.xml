@@ -63,5 +63,11 @@
         android:label="@string/return_title"
         tools:layout="@layout/fragment_web" />
 
+    <fragment
+        android:id="@+id/navigation_direction"
+        android:name="com.example.catalog.ui.direction.DirectionFragment"
+        android:label="@string/return_title"
+        tools:layout="@layout/fragment_direction" />
+
 
 </navigation>

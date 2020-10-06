@@ -1,4 +1,4 @@
-package com.example.catalog.ui.city
+package com.example.catalog.ui.direction
 
 import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
@@ -16,13 +16,13 @@ import com.example.catalog.services.DatabaseService
 import com.example.catalog.services.UiHelper
 import io.realm.RealmResults
 
-class CityFragment : Fragment() {
+class DirectionFragment : Fragment() {
 
     companion object {
-        fun newInstance() = CityFragment()
+        fun newInstance() = DirectionFragment()
     }
 
-    private lateinit var viewModel: CityViewModel
+    private lateinit var viewModel: DirectionViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,22 +31,22 @@ class CityFragment : Fragment() {
         val dbService: DatabaseService = DatabaseService()
         val root = inflater.inflate(R.layout.fragment_city, container, false)
         val baseLayout: LinearLayout = root.findViewById(R.id.base_layout)
-
 //        dbService.createDummyData()
-        val cities: RealmResults<City> = dbService.getAllCities()
+
+        val directions: RealmResults<City> = dbService.getAllCities()
         val uiHelper = UiHelper()
-        for (city in cities) {
+        for (direction in directions) {
             val textView = TextView(requireContext())
-            val button = uiHelper.createSecondaryButton(requireContext(), city.title)
+            val button = uiHelper.createSecondaryButton(requireContext(), direction.title + "direction")
             val bundle = bundleOf(
                 "name" to "",
                 "phone" to "",
-                "direction" to "",
-                "city" to city.title,
+                "direction" to direction.title,
+                "city" to arguments?.getString("city", ""),
                 "address" to ""
             )
             button.setOnClickListener(
-                Navigation.createNavigateOnClickListener(R.id.navigation_direction, bundle)
+                Navigation.createNavigateOnClickListener(R.id.search_result, bundle)
             )
             baseLayout.addView(button)
 
@@ -56,7 +56,7 @@ class CityFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(CityViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(DirectionViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

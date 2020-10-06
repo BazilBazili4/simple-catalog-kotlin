@@ -318,16 +318,7 @@ class UiHelper {
             context.resources.getDrawable(R.drawable.ic_arrow),
             null
         )
-        val bundle = bundleOf(
-            "name" to "",
-            "phone" to "",
-            "direction" to "",
-            "city" to title,
-            "address" to ""
-        )
-        button.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.search_result, bundle)
-        )
+
         button.text = title
         return  button
 
