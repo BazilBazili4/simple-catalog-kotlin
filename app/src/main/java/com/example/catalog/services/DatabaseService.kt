@@ -14,6 +14,12 @@ class DatabaseService {
 
     val realm : Realm = Realm.getDefaultInstance()
 
+    fun clearAllData() {
+        realm.executeTransaction {
+            it.deleteAll()
+        }
+    }
+
     fun createDummyData() {
 
         //The writing to our database always must be in a transaction
@@ -22,7 +28,7 @@ class DatabaseService {
             for(cityCount in 0 until 10){
                 //The value we send as parameter is the primary key
                 val city = it.createObject<City>(cityCount)
-                city.title = "testName{$cityCount}"
+                city.title = "testNewName{$cityCount}"
                 city.logoImg = "30"
             }
 
@@ -38,7 +44,7 @@ class DatabaseService {
             for(cityCount in 0 until 10){
                 //The value we send as parameter is the primary key
                 val direction = it.createObject<Direction>(cityCount)
-                direction.title = "testName{$cityCount}"
+                direction.title = "testNewName{$cityCount}"
                 direction.description = "testDescription{$cityCount}"
             }
 
@@ -54,14 +60,14 @@ class DatabaseService {
             for(cityCount in 0 until 10){
                 //The value we send as parameter is the primary key
                 val organization = it.createObject<Organization>(cityCount)
-                organization.title = "testName{$cityCount}"
+                organization.title = "testNewName{$cityCount}"
                 organization.description = "testDescription{$cityCount}"
                 organization.shortTitle = "testShortTitle{$cityCount}"
                 organization.shortDescription = "testShortDescription{$cityCount}"
                 organization.address = "testAddress{$cityCount}"
                 organization.phone = "testPhone{$cityCount}"
-                organization.city = "testName{$cityCount}"
-                organization.direction = "testName{$cityCount}"
+                organization.city = "testNewName{$cityCount}"
+                organization.direction = "testNewName{$cityCount}"
                 organization.factsDescription =  "testFactsDescription{$cityCount}"
                 organization.siteUrl = "https://github.com"
                 organization.programmUrl = "https://www.google.com"
@@ -69,6 +75,8 @@ class DatabaseService {
                 organization.instagramLink = "https://www.instagram.com"
                 organization.classmatesLink = "https://ok.ru"
                 organization.youtubeLink = "https://www.youtube.com"
+                organization.latitude = 50.613070
+                organization.longitude = 36.535476
             }
 
         }

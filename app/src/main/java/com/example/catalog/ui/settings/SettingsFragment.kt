@@ -75,6 +75,7 @@ class SettingsFragment : Fragment() {
         val  fefreshButton: Button = root.findViewById(R.id.refresh_button)
         fefreshButton.setOnClickListener {
             val ad = AlertDialog.Builder(requireContext()).create()
+            settingsService.reloadDataBase()
             ad.setMessage("Данные обновлены")
             ad.setCancelable(true)
             ad.show()
