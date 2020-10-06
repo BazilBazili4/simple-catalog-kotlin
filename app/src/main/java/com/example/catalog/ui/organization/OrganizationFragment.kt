@@ -2,8 +2,12 @@ package com.example.catalog.ui.organization
 
 import RoundedTransformation
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Paint
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -103,12 +107,34 @@ class OrganizationFragment : Fragment() {
 
         val titleDesc: TextView = root.findViewById(R.id.shortTitleView)
         titleDesc.text = organization?.shortDescription
+        val packageManager: PackageManager = requireContext().packageManager
+
 
         val phone: TextView = root.findViewById(R.id.phoneTextView)
+        val phoneParam = "tel:" + organization?.phone
         phone.text = organization?.phone
+        phone.paintFlags = phone.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        phone.setOnClickListener {
+            val intent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneParam))
+            if (intent.resolveActivity(packageManager) != null) {
+                startActivity(intent)
+            }
+        }
 
         val email: TextView = root.findViewById(R.id.emailTextView)
         email.text = organization?.email
+        email.paintFlags = email.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+        email.setOnClickListener {
+            val emailIntent = Intent(
+                Intent.ACTION_SENDTO, Uri.fromParts(
+                    "mailto", organization?.email, null
+                )
+            )
+            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Тема")
+            emailIntent.putExtra(Intent.EXTRA_TEXT, "Сообщение")
+            startActivity(Intent.createChooser(emailIntent, "Отправить письмо через..."))
+        }
+
 
         return root
     }
@@ -143,7 +169,8 @@ class OrganizationFragment : Fragment() {
         val bitmap = Bitmap.createBitmap(
             drawable.intrinsicWidth,
             drawable.intrinsicHeight,
-            Bitmap.Config.ARGB_8888) ?: return null
+            Bitmap.Config.ARGB_8888
+        ) ?: return null
         val canvas = Canvas(bitmap)
         drawable.setBounds(0, 0, canvas.width, canvas.height)
         drawable.draw(canvas)
@@ -158,3 +185,4 @@ class OrganizationFragment : Fragment() {
     }
 
 }
+

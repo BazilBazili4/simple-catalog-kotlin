@@ -96,6 +96,7 @@
                                 android:textSize="16sp"
                                 android:textColor="@color/generalText"
                                 android:drawableStart="@drawable/ic_phone"
+
                                 android:text="+7(920)555-55-55" />
 
                             <TextView
