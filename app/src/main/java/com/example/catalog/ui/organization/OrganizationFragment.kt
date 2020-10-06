@@ -64,7 +64,7 @@ class OrganizationFragment : Fragment() {
             .into(imageView)
 
         val title: TextView = root.findViewById(R.id.titleText)
-        title.text = organization?.title
+        title.text = organization?.shortTitle
 
 
         val checkBox = root.findViewById<CheckBox>(R.id.favoritesButton)
@@ -179,6 +179,26 @@ class OrganizationFragment : Fragment() {
                     getLinkBundle(it.youtubeLink)
                 )
             )
+
+            val share_text_1_btn = root.findViewById<Button>(R.id.share_button)
+            val siteLink: String = it.siteUrl
+            val title: String = it.title
+            share_text_1_btn.setOnClickListener {
+                val intent= Intent()
+                intent.action=Intent.ACTION_SEND
+                intent.putExtra(Intent.EXTRA_TEXT,"Организация $title в приложении Атлас ДПО. Официальный сайт $siteLink")
+                intent.type="text/plain"
+                startActivity(Intent.createChooser(intent,"Поделиться:"))
+            }
+
+            val titleFull: TextView = root.findViewById(R.id.titleText2)
+            titleFull.text = it.title
+
+            val descrFull: TextView = root.findViewById(R.id.shortTitleDescriptio3)
+            descrFull.text = it.description
+
+            val facts: TextView = root.findViewById(R.id.shortTitleViewFacts)
+            facts.text = it.factsDescription
         }
 
         return root

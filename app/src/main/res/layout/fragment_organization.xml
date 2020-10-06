@@ -294,6 +294,14 @@
                         даже в две строки
                         Мини описание, возможно, даже в две строки" />
 
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:background="?android:attr/listDivider" />
+
                 </LinearLayout>
 
             </LinearLayout>
