@@ -9,14 +9,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
 import com.example.catalog.R
 import com.example.catalog.models.Organization
 import com.example.catalog.services.DatabaseService
@@ -91,6 +90,15 @@ class OrganizationFragment : Fragment() {
             )
             mapView.map.isScrollGesturesEnabled = false
             mapView.map.isTappableAreaRenderingEnabled = false
+
+            val toProgrammButton: Button = root.findViewById(R.id.to_programm_button)
+
+            toProgrammButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(organization.programmUrl)
+                )
+            )
         }
 
         val titleDesc: TextView = root.findViewById(R.id.shortTitleView)
@@ -141,6 +149,12 @@ class OrganizationFragment : Fragment() {
         drawable.draw(canvas)
 
         return bitmap
+    }
+
+    fun getLinkBundle(link: String): Bundle {
+        return bundleOf(
+            "link" to link
+        )
     }
 
 }

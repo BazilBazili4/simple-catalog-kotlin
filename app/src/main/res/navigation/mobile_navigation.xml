@@ -57,5 +57,11 @@
         android:label="@string/return_title"
         tools:layout="@layout/fragment_organization" />
 
+    <fragment
+        android:id="@+id/navigation_web"
+        android:name="com.example.catalog.ui.web.WebFragment"
+        android:label="@string/return_title"
+        tools:layout="@layout/fragment_web" />
+
 
 </navigation>
