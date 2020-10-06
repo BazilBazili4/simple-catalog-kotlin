@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import com.example.catalog.R
 import com.example.catalog.services.DatabaseService
+import com.example.catalog.services.SettingsService
 import com.google.android.material.textfield.TextInputEditText
 
 
@@ -30,6 +31,8 @@ class SearchFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_search, container, false)
         val dbService: DatabaseService = DatabaseService()
+        val settingsService: SettingsService = SettingsService(requireContext())
+        val defaultCity: String? = settingsService.getDefaultCity()
         val spinnerCity: Spinner = root.findViewById(R.id.spinner_city)
         val cities: ArrayList<String> = dbService.getAllCitiesTitlesAsArray()
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -41,6 +44,9 @@ class SearchFragment : Fragment() {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
         spinnerCity.adapter = adapter
+        defaultCity.let {
+            spinnerCity.setSelection(adapter.getPosition(defaultCity));
+        }
 
 
 
