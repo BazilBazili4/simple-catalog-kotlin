@@ -72,14 +72,14 @@ class OrganizationFragment : Fragment() {
             checkBox.isChecked = it.isFavorite
             checkBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
-                    dbService.setOrganizationFavorite(organization.id)
+                    dbService.setOrganizationFavorite(it.id)
                     Toast.makeText(context, "Организация добавлена в избранное", Toast.LENGTH_LONG).show()
                 } else {
-                    dbService.removeOrganizationFavorite(organization.id)
+                    dbService.removeOrganizationFavorite(it.id)
                     Toast.makeText(context, "Организация удалена из избранного", Toast.LENGTH_LONG).show()
                 }
             }
-            val point: Point = Point(organization.latitude, organization.longitude)
+            val point: Point = Point(it.latitude, it.longitude)
             mapView = root.findViewById(R.id.mapview)
             mapView.map.move(
                 CameraPosition(point, 13.6f, 0.0f, 0.0f),
@@ -100,41 +100,86 @@ class OrganizationFragment : Fragment() {
             toProgrammButton.setOnClickListener(
                 Navigation.createNavigateOnClickListener(
                     R.id.navigation_web,
-                    getLinkBundle(organization.programmUrl)
+                    getLinkBundle(it.programmUrl)
                 )
             )
-        }
 
-        val titleDesc: TextView = root.findViewById(R.id.shortTitleView)
-        titleDesc.text = organization?.shortDescription
-        val packageManager: PackageManager = requireContext().packageManager
+            val titleDesc: TextView = root.findViewById(R.id.shortTitleView)
+            titleDesc.text = it.shortDescription
+            val packageManager: PackageManager = requireContext().packageManager
 
 
-        val phone: TextView = root.findViewById(R.id.phoneTextView)
-        val phoneParam = "tel:" + organization?.phone
-        phone.text = organization?.phone
-        phone.paintFlags = phone.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        phone.setOnClickListener {
-            val intent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneParam))
-            if (intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
+            val phone: TextView = root.findViewById(R.id.phoneTextView)
+            val phoneParam = "tel:" + it.phone
+            phone.text = it.phone
+            phone.paintFlags = phone.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            phone.setOnClickListener {
+                val intent = Intent(Intent.ACTION_DIAL, Uri.parse(phoneParam))
+                if (intent.resolveActivity(packageManager) != null) {
+                    startActivity(intent)
+                }
             }
-        }
 
-        val email: TextView = root.findViewById(R.id.emailTextView)
-        email.text = organization?.email
-        email.paintFlags = email.paintFlags or Paint.UNDERLINE_TEXT_FLAG
-        email.setOnClickListener {
-            val emailIntent = Intent(
-                Intent.ACTION_SENDTO, Uri.fromParts(
-                    "mailto", organization?.email, null
+            val email: TextView = root.findViewById(R.id.emailTextView)
+            email.text = it.email
+            val emailString = it.email
+            email.paintFlags = email.paintFlags or Paint.UNDERLINE_TEXT_FLAG
+            email.setOnClickListener {
+                val emailIntent = Intent(
+                    Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto", emailString, null
+                    )
+                )
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Тема")
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Сообщение")
+                startActivity(Intent.createChooser(emailIntent, "Отправить письмо через..."))
+            }
+
+            val toSiteButton: Button = root.findViewById(R.id.to_site_button)
+
+            toSiteButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(it.siteUrl)
                 )
             )
-            emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Тема")
-            emailIntent.putExtra(Intent.EXTRA_TEXT, "Сообщение")
-            startActivity(Intent.createChooser(emailIntent, "Отправить письмо через..."))
-        }
 
+            val toVkButton: Button = root.findViewById(R.id.to_vk_button)
+
+            toVkButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(it.vkLink)
+                )
+            )
+
+            val toInstaButton: Button = root.findViewById(R.id.to_instagram_button)
+
+            toInstaButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(it.instagramLink)
+                )
+            )
+
+            val toClassButton: Button = root.findViewById(R.id.to_classmates_button)
+
+            toClassButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(it.classmatesLink)
+                )
+            )
+
+            val toYtButton: Button = root.findViewById(R.id.to_youtube_button)
+
+            toYtButton.setOnClickListener(
+                Navigation.createNavigateOnClickListener(
+                    R.id.navigation_web,
+                    getLinkBundle(it.youtubeLink)
+                )
+            )
+        }
 
         return root
     }
