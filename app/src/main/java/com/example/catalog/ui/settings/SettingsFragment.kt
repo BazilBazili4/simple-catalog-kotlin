@@ -12,6 +12,8 @@ import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.Spinner
 import com.example.catalog.R
+import com.example.catalog.services.DatabaseService
+import com.example.catalog.services.SettingsService
 
 class SettingsFragment : Fragment() {
 
@@ -27,24 +29,28 @@ class SettingsFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_settings, container, false)
+        val dbService: DatabaseService = DatabaseService()
+        val settingsService: SettingsService = SettingsService(requireContext())
+        val defaultCity: String? = settingsService.getDefaultCity()
         val spinnerCity: Spinner = root.findViewById(R.id.spinner_city)
+        val cities: ArrayList<String> = dbService.getAllCitiesTitlesAsArray()
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter.createFromResource(
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             requireContext(),
-            R.array.brew_array,
-            R.layout.spinner
-        ).also { adapter ->
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            // Apply the adapter to the spinner
-            spinnerCity.adapter = adapter
-        }
+            android.R.layout.simple_spinner_dropdown_item,
+            cities
+        )
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        spinnerCity?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+        spinnerCity.adapter = adapter
+        defaultCity.let {
+            spinnerCity.setSelection(adapter.getPosition(defaultCity));
+        }
+        spinnerCity.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val defaulValue = "Муниципалитет"
                 val selectedValue = spinnerCity.selectedItem.toString()
-                if (!defaulValue.equals(selectedValue)) {
+                if (!defaultCity.equals(selectedValue)) {
+                    settingsService.setDefaultCity(selectedValue)
                     val ad = AlertDialog.Builder(requireContext()).create()
                     ad.setMessage("Муниципалитет по умолчанию: $selectedValue")
                     ad.setCancelable(true)
