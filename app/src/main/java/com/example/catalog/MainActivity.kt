@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.yandex.mapkit.MapKitFactory
 import io.realm.Realm
 import io.realm.RealmConfiguration
 
@@ -20,6 +21,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /**
+         * Задайте API-ключ перед инициализацией MapKitFactory.
+         * Рекомендуется устанавливать ключ в методе Application.onCreate,
+         * но в данном примере он устанавливается в activity.
+         */
+        MapKitFactory.setApiKey("18a215ee-ce71-4072-bc20-967125fce042");
+        /**
+         * Инициализация библиотеки для загрузки необходимых нативных библиотек.
+         * Рекомендуется инициализировать библиотеку MapKit в методе Activity.onCreate
+         * Инициализация в методе Application.onCreate может привести к лишним вызовам и увеличенному использованию батареи.
+         */
+        MapKitFactory.initialize(this);
+
         setContentView(R.layout.activity_main)
         val navView: BottomNavigationView = findViewById(R.id.nav_view)
 

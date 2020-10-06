@@ -108,7 +108,7 @@ class DatabaseService {
         return  organization
     }
 
-    fun getOrganizationById(id: Long): Organization? {
+    fun getOrganizationById(id: Long?): Organization? {
         return realm.where<Organization>()
             .equalTo("id", id)
             .findFirst()

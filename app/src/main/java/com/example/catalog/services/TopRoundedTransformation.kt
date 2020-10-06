@@ -2,7 +2,7 @@ import android.graphics.*
 import com.squareup.picasso.Transformation
 
 
-class RoundedTransformation(
+class TopRoundedTransformation(
     private val radius: Int, // dp
     private var margin: Int
 ) : Transformation {
@@ -31,8 +31,9 @@ class RoundedTransformation(
         if (source != output) {
             source.recycle()
         }
+        val result = Bitmap.createBitmap(output, 0, 0, source.width, (source.height - radius));
 
-        return output
+        return result
     }
 
     override fun key(): String {

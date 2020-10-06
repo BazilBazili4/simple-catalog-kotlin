@@ -1,8 +1,6 @@
 package com.example.catalog.services
 
-import RoundedTransformation
-import android.accounts.AccountManager.get
-import android.app.ActionBar
+import TopRoundedTransformation
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
@@ -115,7 +113,7 @@ class UiHelper {
         )
         textView.layoutParams = params
         textView.setTextColor(context.resources.getColor(R.color.generalText))
-        textView.textSize = 28F
+        textView.textSize = 24F
         textView.text = text
         return  textView
     }
@@ -134,7 +132,7 @@ class UiHelper {
         )
         textView.layoutParams = params
         textView.setTextColor(context.resources.getColor(R.color.secondaryText))
-        textView.textSize = 20F
+        textView.textSize = 18F
         textView.text = text
         return  textView
     }
@@ -236,10 +234,10 @@ class UiHelper {
     fun createCatalogCard(context: Context, organization: Organization, databaseService: DatabaseService): LinearLayout {
         val imageLayout = createRelativeLayout(context)
         val imageView = createImageView(context)
-        val transformation: RoundedTransformation = RoundedTransformation(50, 0)
+        val transformationTop: TopRoundedTransformation = TopRoundedTransformation(50, 0)
         Picasso.with(context)
             .load(organization.logoImg)
-            .transform(transformation)
+            .transform(transformationTop)
             .fit()
             .placeholder(R.drawable.ic_baseline_photo_camera_24) //optional
             .error(R.drawable.ic_setting_empty)

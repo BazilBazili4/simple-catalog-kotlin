@@ -1,14 +1,302 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.organization.OrganizationFragment">
 
-    <TextView
-        android:id="@+id/testId"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ScrollView
+            android:scrollbars="none"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/base_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/test"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/organizationLogo"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/ic_baseline_photo_camera_24" />
+
+                        <CheckBox
+                            android:id="@+id/favoritesButton"
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:button="@null"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginEnd="10dp"
+                            android:background="@drawable/favorites_checkbox_selector" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/titleText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="24sp"
+                        android:textColor="@color/generalText"
+                        android:text="СОШ №27 Школа" />
+
+                    <TextView
+                        android:id="@+id/shortTitleView"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/secondaryText"
+                        android:layout_height="wrap_content"
+                        android:text="Мини описание, возможно, даже в две строки" />
+
+                    <TableLayout
+                        android:stretchColumns="*"
+                        android:layout_width="match_parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="match_parent">
+
+                        <TableRow
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="5dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" >
+
+                            <TextView
+                                android:id="@+id/phoneTextView"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@color/generalText"
+                                android:drawableStart="@drawable/ic_phone"
+                                android:text="+7(920)555-55-55" />
+
+                            <TextView
+                                android:id="@+id/emailTextView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16sp"
+                                android:textColor="@color/generalText"
+                                android:drawableStart="@drawable/ic_message"
+                                android:text="ул. Ленина 26" />
+                        </TableRow>
+
+                    </TableLayout>
+
+                    <Button
+                        android:id="@+id/to_programm_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Перейти на программу" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <TextView
+                        android:id="@+id/addressTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="16sp"
+                        android:textColor="@color/generalText"
+                        android:drawableStart="@drawable/ic_location"
+                        android:text="ул. Ленина 25" />
+
+                    <com.yandex.mapkit.mapview.MapView
+                        android:id="@+id/mapview"
+                        android:layout_width="match_parent"
+                        android:layout_height="218dp"
+                        android:visibility="visible"
+                        tools:visibility="visible">
+
+                    </com.yandex.mapkit.mapview.MapView>
+
+                    <Button
+                        android:id="@+id/to_navigator_button"
+                        style="@style/buttonSecondary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Построить маршрут" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <Button
+                        android:id="@+id/to_site_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Официальный сайт" />
+
+                    <Button
+                        android:id="@+id/to_vk_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Вконтакте" />
+
+                    <Button
+                        android:id="@+id/to_instagram_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Instagram" />
+
+                    <Button
+                        android:id="@+id/to_classmates_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Однокласники" />
+
+                    <Button
+                        android:id="@+id/to_youtube_button"
+                        style="@style/buttonPrimary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:text="Youtube" />
+
+                    <Button
+                        android:id="@+id/share_button"
+                        style="@style/buttonSecondary"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:height="36dp"
+                        android:layout_gravity="center_horizontal"
+                        android:drawableEnd="@drawable/ic_baseline_share_24"
+                        android:text="Поделиться" />
+
+                    <TextView
+                        android:id="@+id/titleText2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="15dp"
+                        android:textSize="24sp"
+                        android:textColor="@color/generalText"
+                        android:text="СОШ №27 Школа" />
+
+                    <TextView
+                        android:id="@+id/shortTitleDescriptio3"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/secondaryText"
+                        android:layout_height="wrap_content"
+                        android:text="Мини описание, возможно, даже в две
+                         строки Мини описание, возможно,
+                        даже в две строки Мини описание, возможно,
+                        даже в две строки
+                        Мини описание, возможно, даже в две строки" />
+
+                    <TextView
+                        android:id="@+id/titleTextFacts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="15dp"
+                        android:textSize="24sp"
+                        android:textColor="@color/generalText"
+                        android:text="Интересные факты" />
+
+                    <TextView
+                        android:id="@+id/shortTitleViewFacts"
+                        android:layout_width="match_parent"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginTop="5dp"
+                        android:textSize="18sp"
+                        android:textColor="@color/secondaryText"
+                        android:layout_height="wrap_content"
+                        android:text="Мини описание, возможно, даже в две
+                         строки Мини описание, возможно,
+                        даже в две строки Мини описание, возможно,
+                        даже в две строки
+                        Мини описание, возможно, даже в две строки" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
 
 </FrameLayout>
