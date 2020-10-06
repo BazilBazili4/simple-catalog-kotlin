@@ -9,8 +9,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.fragment.app.Fragment
@@ -60,22 +62,45 @@ class OrganizationFragment : Fragment() {
 
         val title: TextView = root.findViewById(R.id.titleText)
         title.text = organization?.title
-        mapView = root.findViewById(R.id.mapview)
-        mapView.map.move(
-            CameraPosition(Point(50.597810, 36.598038), 13.6f, 0.0f, 0.0f),
-            Animation(Animation.Type.SMOOTH, 0f),
-            null
-        )
 
-        val resourceBackedImage = ImageProvider.fromBitmap(
-            getBitmapFromVectorDrawable(R.drawable.ic_location, requireContext())
-        )
-        val placemark: PlacemarkMapObject = mapView.map.mapObjects.addPlacemark(
-            Point(50.597810, 36.598038), resourceBackedImage
-        )
-        mapView.map.isScrollGesturesEnabled = false
-        mapView.map.isTappableAreaRenderingEnabled = false
 
+        val checkBox = root.findViewById<CheckBox>(R.id.favoritesButton)
+        organization?.let {
+            checkBox.isChecked = it.isFavorite
+            checkBox.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    dbService.setOrganizationFavorite(organization.id)
+                    Toast.makeText(context, "Организация добавлена в избранное", Toast.LENGTH_LONG).show()
+                } else {
+                    dbService.removeOrganizationFavorite(organization.id)
+                    Toast.makeText(context, "Организация удалена из избранного", Toast.LENGTH_LONG).show()
+                }
+            }
+            val point: Point = Point(organization.latitude, organization.longitude)
+            mapView = root.findViewById(R.id.mapview)
+            mapView.map.move(
+                CameraPosition(point, 13.6f, 0.0f, 0.0f),
+                Animation(Animation.Type.SMOOTH, 0f),
+                null
+            )
+            val resourceBackedImage = ImageProvider.fromBitmap(
+                getBitmapFromVectorDrawable(R.drawable.ic_location, requireContext())
+            )
+            val placemark: PlacemarkMapObject = mapView.map.mapObjects.addPlacemark(
+                point, resourceBackedImage
+            )
+            mapView.map.isScrollGesturesEnabled = false
+            mapView.map.isTappableAreaRenderingEnabled = false
+        }
+
+        val titleDesc: TextView = root.findViewById(R.id.shortTitleView)
+        titleDesc.text = organization?.shortDescription
+
+        val phone: TextView = root.findViewById(R.id.phoneTextView)
+        phone.text = organization?.phone
+
+        val email: TextView = root.findViewById(R.id.emailTextView)
+        email.text = organization?.email
 
         return root
     }
